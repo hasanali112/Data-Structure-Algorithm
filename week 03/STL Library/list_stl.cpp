@@ -8,5 +8,10 @@ int main()
     {
         cout << *it << endl;
     }
+
+    for (auto it = l.rbegin(); it != l.rend(); it++)
+    {
+        cout << *it << endl;
+    }
     return 0;
 }
