@@ -16,39 +16,31 @@ public:
     }
 };
 
-void instert_at_tail(Node *&head, Node *&tail, int val)
+void inserted_any_position(Node *&head, int idx, int val)
 {
     Node *newnode = new Node(val);
-    if (head == NULL)
-    {
-        head = newnode;
-        tail = newnode;
-        return;
-    }
 
-    tail->next = newnode;
-    newnode->prev = tail;
-    tail = newnode;
+    Node *temp = head;
+
+    for (int i = 0; i < idx - 1; i++)
+    {
+
+        temp = temp->next;
+    }
+    newnode->next = temp->next;
+    temp->next->prev = newnode;
+    temp->next = newnode;
+    newnode->prev = temp;
 }
 
-void print_forward_linked_list(Node *head)
+void print_forward_list(Node *head)
 {
     Node *temp = head;
+
     while (temp != NULL)
     {
         cout << temp->val << " ";
         temp = temp->next;
-    }
-    cout << endl;
-}
-
-void print_backword_linked_list(Node *tail)
-{
-    Node *temp = tail;
-    while (temp != NULL)
-    {
-        cout << temp->val << " ";
-        temp = temp->prev;
     }
     cout << endl;
 }
@@ -64,10 +56,8 @@ int main()
     a->next = tail;
     tail->prev = a;
 
-    instert_at_tail(head, tail, 100);
-
-    print_forward_linked_list(head);
-    print_backword_linked_list(tail);
-
+    inserted_any_position(head, 2, 100);
+    inserted_any_position(head, 3, 200);
+    print_forward_list(head);
     return 0;
 }

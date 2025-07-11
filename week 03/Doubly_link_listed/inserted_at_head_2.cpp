@@ -7,7 +7,6 @@ public:
     int val;
     Node *next;
     Node *prev;
-
     Node(int val)
     {
         this->val = val;
@@ -16,9 +15,10 @@ public:
     }
 };
 
-void instert_at_tail(Node *&head, Node *&tail, int val)
+void inserted_at_head(Node *&head, Node *tail, int val)
 {
     Node *newnode = new Node(val);
+
     if (head == NULL)
     {
         head = newnode;
@@ -26,9 +26,9 @@ void instert_at_tail(Node *&head, Node *&tail, int val)
         return;
     }
 
-    tail->next = newnode;
-    newnode->prev = tail;
-    tail = newnode;
+    newnode->next = head;
+    head->prev = newnode;
+    head = newnode;
 }
 
 void print_forward_linked_list(Node *head)
@@ -60,11 +60,12 @@ int main()
     Node *tail = new Node(30);
 
     head->next = a;
-    a->prev = head;
     a->next = tail;
+    a->prev = head;
     tail->prev = a;
 
-    instert_at_tail(head, tail, 100);
+    inserted_at_head(head, tail, 100);
+    inserted_at_head(head, tail, 200);
 
     print_forward_linked_list(head);
     print_backword_linked_list(tail);

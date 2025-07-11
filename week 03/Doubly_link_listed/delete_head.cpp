@@ -16,39 +16,28 @@ public:
     }
 };
 
-void instert_at_tail(Node *&head, Node *&tail, int val)
+void delete_head_position(Node *&head, Node *&tail)
 {
-    Node *newnode = new Node(val);
+    Node *deletenode = head;
+    head = head->next;
+    delete deletenode;
     if (head == NULL)
     {
-        head = newnode;
-        tail = newnode;
+        tail = NULL;
         return;
-    }
+    } // bujhte hobe
 
-    tail->next = newnode;
-    newnode->prev = tail;
-    tail = newnode;
+    head->prev = NULL;
 }
 
-void print_forward_linked_list(Node *head)
+void print_forward_list(Node *head)
 {
     Node *temp = head;
+
     while (temp != NULL)
     {
         cout << temp->val << " ";
         temp = temp->next;
-    }
-    cout << endl;
-}
-
-void print_backword_linked_list(Node *tail)
-{
-    Node *temp = tail;
-    while (temp != NULL)
-    {
-        cout << temp->val << " ";
-        temp = temp->prev;
     }
     cout << endl;
 }
@@ -64,10 +53,9 @@ int main()
     a->next = tail;
     tail->prev = a;
 
-    instert_at_tail(head, tail, 100);
-
-    print_forward_linked_list(head);
-    print_backword_linked_list(tail);
-
+    delete_head_position(head, tail);
+    delete_head_position(head, tail);
+    // delete_head_position(head, 3, 200);
+    print_forward_list(head);
     return 0;
 }
