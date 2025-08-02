@@ -62,40 +62,46 @@ Node *input_tree()
     return root;
 }
 
-void outer_left_tree(Node *root)
+int max_height(Node *root)
 {
     if (root == NULL)
-    {
-        return;
-    }
+        return 0;
+    if (root->left == NULL && root->right == NULL)
+        return 1;
+    int l = max_height(root->left);
+    int r = max_height(root->right);
 
-    if (root->left != NULL)
-        outer_left_tree(root->left);
-    else
-        outer_left_tree(root->right);
-    cout << root->val << " ";
+    return max(l, r) + 1;
 }
 
-void outer_right_tree(Node *root)
+int total_count(Node *root)
 {
     if (root == NULL)
-    {
-        return;
-    }
-    cout << root->val << " ";
-    if (root->right != NULL)
-        outer_right_tree(root->right);
-    else
-        outer_right_tree(root->left);
+        return 0;
+
+    int l = total_count(root->left);
+    int r = total_count(root->right);
+
+    return l + r + 1;
 }
 
 int main()
 {
 
     Node *root = input_tree();
-    outer_left_tree(root->left);
-    cout << root->val << " ";
-    outer_right_tree(root->right);
+    int max_depth = max_height(root);
+    int total = total_count(root);
+
+    int max_total_cout = pow(2, max_depth) - 1;
+
+    if (total == max_total_cout)
+    {
+        cout << "YES" << endl;
+    }
+    else
+    {
+        cout << "NO" << endl;
+    }
 
     return 0;
 }
